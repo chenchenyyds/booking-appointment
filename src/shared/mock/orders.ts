@@ -1,10 +1,10 @@
 export type OrderStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled'
 
-export const ORDER_STATUS_MAP: Record<OrderStatus, { label: string; color: string }> = {
-  pending: { label: '待确认', color: '#faad14' },
-  confirmed: { label: '已确认', color: '#52c41a' },
-  completed: { label: '已完成', color: '#1890ff' },
-  cancelled: { label: '已取消', color: '#999' },
+export const ORDER_STATUS_MAP: Record<OrderStatus, { labelKey: string; color: string }> = {
+  pending: { labelKey: 'orders.pending', color: '#faad14' },
+  confirmed: { labelKey: 'orders.confirmed', color: '#52c41a' },
+  completed: { labelKey: 'orders.completed', color: '#1890ff' },
+  cancelled: { labelKey: 'orders.cancelled', color: '#999' },
 }
 
 export interface OrderItem {

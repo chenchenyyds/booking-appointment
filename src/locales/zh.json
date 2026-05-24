@@ -1,0 +1,90 @@
+{
+  "app": {
+    "name": "预约助手",
+    "subtitle": "在线预约，便捷管理"
+  },
+  "home": {
+    "bannerTitle": "在线预约",
+    "bannerSubtitle": "选择服务，轻松预约",
+    "categories": "服务分类",
+    "viewAll": "查看全部",
+    "quickActions": "快捷入口",
+    "browseServices": "浏览全部服务",
+    "myOrders": "我的订单"
+  },
+  "services": {
+    "title": "服务项目",
+    "bookNow": "立即预约",
+    "minutes": "分钟",
+    "empty": "暂无服务项目",
+    "price": "价格",
+    "detail": "服务详情",
+    "bookingTitle": "预约信息",
+    "selectDate": "选择日期",
+    "selectTime": "选择时间",
+    "name": "姓名",
+    "phone": "手机号",
+    "remark": "备注（选填）",
+    "remarkPlaceholder": "如有特殊需求请注明",
+    "confirmBooking": "确认预约",
+    "bookingSuccess": "预约成功！",
+    "bookingFail": "预约失败，请重试",
+    "fillComplete": "请填写完整信息"
+  },
+  "orders": {
+    "title": "我的预约",
+    "all": "全部",
+    "pending": "待确认",
+    "confirmed": "已确认",
+    "completed": "已完成",
+    "cancelled": "已取消",
+    "empty": "暂无订单",
+    "detail": "订单详情",
+    "bookingInfo": "预约信息",
+    "orderInfo": "订单信息",
+    "date": "预约日期",
+    "time": "预约时间",
+    "orderId": "订单编号",
+    "createdAt": "创建时间",
+    "cancel": "取消预约",
+    "cancelConfirm": "确定要取消该预约吗？",
+    "cancelledSuccess": "已取消",
+    "payNow": "去支付"
+  },
+  "payment": {
+    "title": "确认支付",
+    "amount": "支付金额",
+    "method": "支付方式",
+    "wechatPay": "微信支付",
+    "confirmPay": "确认支付",
+    "success": "支付成功",
+    "successMsg": "您的预约已确认，请按时到店享受服务。",
+    "fail": "支付失败",
+    "failMsg": "支付未完成，请稍后重试。"
+  },
+  "user": {
+    "title": "个人中心",
+    "notLoggedIn": "未登录",
+    "loginHint": "点击登录，体验更多功能",
+    "myOrders": "我的预约",
+    "notifications": "消息通知",
+    "settings": "设置",
+    "logout": "退出登录",
+    "login": "立即登录",
+    "logoutConfirm": "确定要退出登录吗？",
+    "logoutSuccess": "已退出登录"
+  },
+  "login": {
+    "title": "登录",
+    "wechatLogin": "微信一键登录",
+    "skip": "暂不登录，先看看",
+    "agreement": "登录即表示同意《用户协议》和《隐私政策》",
+    "success": "登录成功",
+    "fail": "登录失败，请重试"
+  },
+  "common": {
+    "loading": "加载中...",
+    "confirm": "确认",
+    "cancel": "取消"
+  }
+}

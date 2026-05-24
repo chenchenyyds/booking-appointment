@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import { View, Text, Image, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { useTranslation } from 'react-i18next'
 import { Tabs, Tag, Badge } from '@nutui/nutui-react-taro'
 import NavigationHeader from '@/shared/components/navigation_header'
+import LanguageSwitcher from '@/shared/components/language-switcher'
 import Router from '@/shared/utils/route'
 import { mockOrders, ORDER_STATUS_MAP, OrderStatus } from '@/shared/mock/orders'
 import './index.scss'
 
-const statusTabs: { key: string; title: string }[] = [
-  { key: 'all', title: '全部' },
-  { key: 'pending', title: '待确认' },
-  { key: 'confirmed', title: '已确认' },
-  { key: 'completed', title: '已完成' },
-  { key: 'cancelled', title: '已取消' },
-]
-
 const OrderList: React.FC = () => {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState('all')
+
+  const statusTabs: { key: string; title: string }[] = [
+    { key: 'all', title: t('orders.all') },
+    { key: 'pending', title: t('orders.pending') },
+    { key: 'confirmed', title: t('orders.confirmed') },
+    { key: 'completed', title: t('orders.completed') },
+    { key: 'cancelled', title: t('orders.cancelled') },
+  ]
 
   const filteredOrders =
     activeTab === 'all'
@@ -29,7 +32,8 @@ const OrderList: React.FC = () => {
 
   return (
     <View className="order-list-page">
-      <NavigationHeader title="我的预约" />
+      <NavigationHeader title={t('orders.title')} />
+      <LanguageSwitcher />
       <View className="order-list-content">
         <Tabs
           value={activeTab}
@@ -43,7 +47,7 @@ const OrderList: React.FC = () => {
 
         <ScrollView scrollY className="order-scroll">
           {filteredOrders.length === 0 ? (
-            <View className="order-empty">暂无订单</View>
+            <View className="order-empty">{t('orders.empty')}</View>
           ) : (
             filteredOrders.map((order) => {
               const statusInfo = ORDER_STATUS_MAP[order.status]
@@ -64,7 +68,7 @@ const OrderList: React.FC = () => {
                       <Tag
                         style={{ backgroundColor: statusInfo.color, color: '#fff', border: 'none' }}
                       >
-                        {statusInfo.label}
+                        {t(statusInfo.labelKey)}
                       </Tag>
                     </View>
                     <View className="order-card-info">
@@ -74,7 +78,7 @@ const OrderList: React.FC = () => {
                       <Text className="order-price">¥{order.price}</Text>
                     </View>
                     <View className="order-card-footer">
-                      <Text className="order-id">订单号: {order.id}</Text>
+                      <Text className="order-id">{t('orders.orderId')}: {order.id}</Text>
                     </View>
                   </View>
                 </View>

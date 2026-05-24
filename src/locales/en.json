@@ -1,0 +1,90 @@
+{
+  "app": {
+    "name": "Booking Assistant",
+    "subtitle": "Online booking, easy management"
+  },
+  "home": {
+    "bannerTitle": "Online Booking",
+    "bannerSubtitle": "Choose a service, book easily",
+    "categories": "Service Categories",
+    "viewAll": "View All",
+    "quickActions": "Quick Actions",
+    "browseServices": "Browse All Services",
+    "myOrders": "My Orders"
+  },
+  "services": {
+    "title": "Services",
+    "bookNow": "Book Now",
+    "minutes": "min",
+    "empty": "No services available",
+    "price": "Price",
+    "detail": "Service Details",
+    "bookingTitle": "Booking Info",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "name": "Name",
+    "phone": "Phone",
+    "remark": "Remark (optional)",
+    "remarkPlaceholder": "Special requirements",
+    "confirmBooking": "Confirm Booking",
+    "bookingSuccess": "Booking successful!",
+    "bookingFail": "Booking failed, please retry",
+    "fillComplete": "Please fill in all required info"
+  },
+  "orders": {
+    "title": "My Orders",
+    "all": "All",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "empty": "No orders",
+    "detail": "Order Details",
+    "bookingInfo": "Booking Info",
+    "orderInfo": "Order Info",
+    "date": "Date",
+    "time": "Time",
+    "orderId": "Order ID",
+    "createdAt": "Created",
+    "cancel": "Cancel Booking",
+    "cancelConfirm": "Are you sure you want to cancel this booking?",
+    "cancelledSuccess": "Cancelled",
+    "payNow": "Pay Now"
+  },
+  "payment": {
+    "title": "Confirm Payment",
+    "amount": "Payment Amount",
+    "method": "Payment Method",
+    "wechatPay": "WeChat Pay",
+    "confirmPay": "Confirm Payment",
+    "success": "Payment Successful",
+    "successMsg": "Your booking has been confirmed. Please arrive on time.",
+    "fail": "Payment Failed",
+    "failMsg": "Payment not completed. Please try again later."
+  },
+  "user": {
+    "title": "Profile",
+    "notLoggedIn": "Not logged in",
+    "loginHint": "Tap to login",
+    "myOrders": "My Orders",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "login": "Login Now",
+    "logoutConfirm": "Are you sure you want to log out?",
+    "logoutSuccess": "Logged out"
+  },
+  "login": {
+    "title": "Login",
+    "wechatLogin": "WeChat Login",
+    "skip": "Skip for now",
+    "agreement": "By logging in, you agree to the Terms of Service and Privacy Policy",
+    "success": "Login successful",
+    "fail": "Login failed, please retry"
+  },
+  "common": {
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  }
+}

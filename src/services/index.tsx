@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { useTranslation } from 'react-i18next'
 import { Tabs, Card, Tag } from '@nutui/nutui-react-taro'
 import NavigationHeader from '@/shared/components/navigation_header'
+import LanguageSwitcher from '@/shared/components/language-switcher'
 import Router from '@/shared/utils/route'
 import { getServices, getServiceDetail } from '@/shared/services/appointment.service'
 import { serviceCategories, ServiceItem } from '@/shared/mock/services'
 import './index.scss'
 
 const ServiceList: React.FC = () => {
+  const { t } = useTranslation()
   const [activeCategory, setActiveCategory] = useState('hair')
   const [services, setServices] = useState<ServiceItem[]>([])
   const [loading, setLoading] = useState(false)
@@ -23,7 +26,7 @@ const ServiceList: React.FC = () => {
       const data = await getServices(category)
       setServices(data)
     } catch (e) {
-      Taro.showToast({ title: '加载失败', icon: 'none' })
+      Taro.showToast({ title: t('common.loading'), icon: 'none' })
     } finally {
       setLoading(false)
     }
@@ -46,7 +49,8 @@ const ServiceList: React.FC = () => {
 
   return (
     <View className="service-list-page">
-      <NavigationHeader title="服务项目" />
+      <NavigationHeader title={t('services.title')} />
+      <LanguageSwitcher />
       <View className="service-list-content">
         <Tabs
           value={activeCategory}
@@ -88,12 +92,12 @@ const ServiceList: React.FC = () => {
                     <Text className="price-value">{service.price}</Text>
                   </View>
                   <View className="service-card-meta">
-                    <Text className="service-duration">⏱ {service.duration}分钟</Text>
+                    <Text className="service-duration">⏱ {service.duration}{t('services.minutes')}</Text>
                     <View
                       className="service-book-btn"
                       onClick={(e) => handleBookNow(e, service)}
                     >
-                      <Text className="book-btn-text">立即预约</Text>
+                      <Text className="book-btn-text">{t('services.bookNow')}</Text>
                     </View>
                   </View>
                 </View>
@@ -101,7 +105,7 @@ const ServiceList: React.FC = () => {
             </View>
           ))}
           {!loading && services.length === 0 && (
-            <View className="service-empty">暂无服务项目</View>
+            <View className="service-empty">{t('services.empty')}</View>
           )}
         </ScrollView>
       </View>

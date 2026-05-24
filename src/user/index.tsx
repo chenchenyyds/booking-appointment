@@ -1,14 +1,17 @@
 import React from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { useTranslation } from 'react-i18next'
 import { inject, observer } from 'mobx-react'
 import { Button, Avatar } from '@nutui/nutui-react-taro'
 import PageContainer from '@/shared/components/page_container'
+import LanguageSwitcher from '@/shared/components/language-switcher'
 import Router from '@/shared/utils/route'
 
 import './index.scss'
 
 const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
+  const { t } = useTranslation()
   const { auth } = store
   const isLoggedIn = auth.checkLogin()
   const userInfo = auth.userInfo
@@ -19,12 +22,12 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
 
   const handleLogout = () => {
     Taro.showModal({
-      title: '提示',
-      content: '确定要退出登录吗？',
+      title: t('common.confirm'),
+      content: t('user.logoutConfirm'),
       success: (res) => {
         if (res.confirm) {
           auth.logout()
-          Taro.showToast({ title: '已退出登录', icon: 'success' })
+          Taro.showToast({ title: t('user.logoutSuccess'), icon: 'success' })
         }
       },
     })
@@ -39,7 +42,8 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
   }
 
   return (
-    <PageContainer title="个人中心" containerClass="user-index-page">
+    <PageContainer title={t('user.title')} containerClass="user-index-page">
+      <LanguageSwitcher />
       <View className="user-content">
         <View className="user-profile-card">
           {isLoggedIn && userInfo ? (
@@ -53,9 +57,9 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
               <View className="user-avatar-placeholder">
                 <Avatar size="large" />
               </View>
-              <Text className="user-nickname">未登录</Text>
+              <Text className="user-nickname">{t('user.notLoggedIn')}</Text>
               <Text className="user-login-hint" onClick={handleLogin}>
-                点击登录，体验更多功能
+                {t('user.loginHint')}
               </Text>
             </>
           )}
@@ -64,17 +68,17 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
         <View className="user-menu">
           <View className="user-menu-item" onClick={handleMyOrders}>
             <Text className="user-menu-icon">📋</Text>
-            <Text className="user-menu-label">我的预约</Text>
+            <Text className="user-menu-label">{t('user.myOrders')}</Text>
             <Text className="user-menu-arrow">&gt;</Text>
           </View>
           <View className="user-menu-item">
             <Text className="user-menu-icon">🔔</Text>
-            <Text className="user-menu-label">消息通知</Text>
+            <Text className="user-menu-label">{t('user.notifications')}</Text>
             <Text className="user-menu-arrow">&gt;</Text>
           </View>
           <View className="user-menu-item">
             <Text className="user-menu-icon">⚙️</Text>
-            <Text className="user-menu-label">设置</Text>
+            <Text className="user-menu-label">{t('user.settings')}</Text>
             <Text className="user-menu-arrow">&gt;</Text>
           </View>
         </View>
@@ -82,7 +86,7 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
         <View className="user-actions">
           {isLoggedIn ? (
             <Button block size="large" onClick={handleLogout} className="user-logout-btn">
-              退出登录
+              {t('user.logout')}
             </Button>
           ) : (
             <Button
@@ -92,7 +96,7 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
               onClick={handleLogin}
               className="user-login-btn"
             >
-              立即登录
+              {t('user.login')}
             </Button>
           )}
         </View>

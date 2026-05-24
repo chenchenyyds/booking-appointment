@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react'
 import store from './shared/store'
 import Router from './shared/utils/route'
 
+import './shared/i18n'
 import './app.scss'
 
 class App extends Component {

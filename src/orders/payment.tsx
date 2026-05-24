@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
+import { useTranslation } from 'react-i18next'
 import { Button as NutButton, Dialog } from '@nutui/nutui-react-taro'
 import NavigationHeader from '@/shared/components/navigation_header'
 import Router from '@/shared/utils/route'
@@ -8,6 +9,7 @@ import { mockOrders } from '@/shared/mock/orders'
 import './payment.scss'
 
 const PaymentPage: React.FC = () => {
+  const { t } = useTranslation()
   const router = useRouter()
   const { orderId, amount } = router.params
   const [paying, setPaying] = useState(false)
@@ -16,13 +18,11 @@ const PaymentPage: React.FC = () => {
 
   const handlePay = () => {
     setPaying(true)
-    // Mock payment process
     setTimeout(() => {
       setPaying(false)
       setPaySuccess(true)
       setShowResult(true)
 
-      // Update order status
       const order = mockOrders.find((o) => o.id === orderId)
       if (order && order.status === 'pending') {
         order.status = 'confirmed'
@@ -43,11 +43,11 @@ const PaymentPage: React.FC = () => {
 
   return (
     <View className="payment-page">
-      <NavigationHeader title="确认支付" />
+      <NavigationHeader title={t('payment.title')} />
       <View className="payment-content">
         <View className="payment-card">
           <View className="payment-amount-section">
-            <Text className="payment-label">支付金额</Text>
+            <Text className="payment-label">{t('payment.amount')}</Text>
             <View className="payment-amount">
               <Text className="payment-currency">¥</Text>
               <Text className="payment-value">{amount}</Text>
@@ -56,12 +56,12 @@ const PaymentPage: React.FC = () => {
 
           <View className="payment-info-section">
             <View className="payment-info-row">
-              <Text className="payment-info-label">订单编号</Text>
+              <Text className="payment-info-label">{t('orders.orderId')}</Text>
               <Text className="payment-info-value">{orderId}</Text>
             </View>
             <View className="payment-info-row">
-              <Text className="payment-info-label">支付方式</Text>
-              <Text className="payment-info-value">微信支付</Text>
+              <Text className="payment-info-label">{t('payment.method')}</Text>
+              <Text className="payment-info-value">{t('payment.wechatPay')}</Text>
             </View>
           </View>
         </View>
@@ -69,7 +69,7 @@ const PaymentPage: React.FC = () => {
         <View className="payment-methods">
           <View className="payment-method-item active">
             <Text className="payment-method-icon">💚</Text>
-            <Text className="payment-method-name">微信支付</Text>
+            <Text className="payment-method-name">{t('payment.wechatPay')}</Text>
             <View className="payment-method-check" />
           </View>
         </View>
@@ -77,7 +77,7 @@ const PaymentPage: React.FC = () => {
 
       <View className="payment-bottom-bar">
         <NutButton onClick={handleCancel} className="payment-btn-cancel">
-          取消
+          {t('common.cancel')}
         </NutButton>
         <NutButton
           type="primary"
@@ -85,19 +85,17 @@ const PaymentPage: React.FC = () => {
           onClick={handlePay}
           className="payment-btn-confirm"
         >
-          确认支付 ¥{amount}
+          {t('payment.confirmPay')} ¥{amount}
         </NutButton>
       </View>
 
       <Dialog
         visible={showResult}
-        title={paySuccess ? '支付成功' : '支付失败'}
+        title={paySuccess ? t('payment.success') : t('payment.fail')}
         onConfirm={handleResultConfirm}
         hideCancelButton
       >
-        {paySuccess
-          ? '您的预约已确认，请按时到店享受服务。'
-          : '支付未完成，请稍后重试。'}
+        {paySuccess ? t('payment.successMsg') : t('payment.failMsg')}
       </Dialog>
     </View>
   )

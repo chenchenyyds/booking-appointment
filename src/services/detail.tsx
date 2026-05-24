@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, ScrollView } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
+import { useTranslation } from 'react-i18next'
 import { Tag, Button as NutButton, Input, TextArea } from '@nutui/nutui-react-taro'
 import NavigationHeader from '@/shared/components/navigation_header'
 import Router from '@/shared/utils/route'
@@ -10,13 +11,13 @@ import { ServiceItem } from '@/shared/mock/services'
 import './detail.scss'
 
 const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
+  const { t } = useTranslation()
   const router = useRouter()
   const { id, book } = router.params
   const [service, setService] = useState<ServiceItem | null>(null)
   const [loading, setLoading] = useState(false)
   const [showForm, setShowForm] = useState(!!book)
 
-  // Booking form
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState('')
   const [name, setName] = useState('')
@@ -34,7 +35,7 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
 
   const handleBook = async () => {
     if (!selectedDate || !selectedTime || !name || !phone) {
-      Taro.showToast({ title: '请填写完整信息', icon: 'none' })
+      Taro.showToast({ title: t('services.fillComplete'), icon: 'none' })
       return
     }
     setLoading(true)
@@ -47,16 +48,15 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
         phone,
         remark,
       })
-      Taro.showToast({ title: '预约成功！', icon: 'success' })
+      Taro.showToast({ title: t('services.bookingSuccess'), icon: 'success' })
       setTimeout(() => Router.backToHome(), 1500)
     } catch (e) {
-      Taro.showToast({ title: '预约失败，请重试', icon: 'none' })
+      Taro.showToast({ title: t('services.bookingFail'), icon: 'none' })
     } finally {
       setLoading(false)
     }
   }
 
-  // Generate date options for next 7 days
   const dateOptions = Array.from({ length: 7 }, (_, i) => {
     const d = new Date()
     d.setDate(d.getDate() + i)
@@ -67,11 +67,11 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
 
   const timeSlots = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
 
-  if (!service) return <View className="detail-loading">加载中...</View>
+  if (!service) return <View className="detail-loading">{t('common.loading')}</View>
 
   return (
     <View className="service-detail-page">
-      <NavigationHeader title={service.name} />
+      <NavigationHeader title={t('services.detail')} />
       <ScrollView scrollY className="detail-scroll">
         <Image
           src={service.image}
@@ -94,7 +94,7 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
               <Text className="detail-price-symbol">¥</Text>
               <Text className="detail-price-value">{service.price}</Text>
             </View>
-            <Text className="detail-duration">⏱ 约{service.duration}分钟</Text>
+            <Text className="detail-duration">⏱ {t('services.minutes', { count: service.duration })}</Text>
           </View>
 
           <Text className="detail-desc">{service.description}</Text>
@@ -102,10 +102,10 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
 
         {showForm && (
           <View className="detail-section booking-form">
-            <Text className="section-title">预约信息</Text>
+            <Text className="section-title">{t('services.bookingTitle')}</Text>
 
             <View className="form-group">
-              <Text className="form-label">选择日期</Text>
+              <Text className="form-label">{t('services.selectDate')}</Text>
               <View className="date-grid">
                 {dateOptions.map((d) => (
                   <View
@@ -120,24 +120,24 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
             </View>
 
             <View className="form-group">
-              <Text className="form-label">选择时间</Text>
+              <Text className="form-label">{t('services.selectTime')}</Text>
               <View className="time-grid">
-                {timeSlots.map((t) => (
+                {timeSlots.map((slot) => (
                   <View
-                    key={t}
-                    className={`time-item ${selectedTime === t ? 'active' : ''}`}
-                    onClick={() => setSelectedTime(t)}
+                    key={slot}
+                    className={`time-item ${selectedTime === slot ? 'active' : ''}`}
+                    onClick={() => setSelectedTime(slot)}
                   >
-                    <Text>{t}</Text>
+                    <Text>{slot}</Text>
                   </View>
                 ))}
               </View>
             </View>
 
             <View className="form-group">
-              <Text className="form-label">姓名</Text>
+              <Text className="form-label">{t('services.name')}</Text>
               <Input
-                placeholder="请输入姓名"
+                placeholder={t('services.name')}
                 value={name}
                 onChange={(v) => setName(v)}
                 className="form-input"
@@ -145,9 +145,9 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
             </View>
 
             <View className="form-group">
-              <Text className="form-label">手机号</Text>
+              <Text className="form-label">{t('services.phone')}</Text>
               <Input
-                placeholder="请输入手机号"
+                placeholder={t('services.phone')}
                 type="number"
                 maxlength={11}
                 value={phone}
@@ -157,9 +157,9 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
             </View>
 
             <View className="form-group">
-              <Text className="form-label">备注（选填）</Text>
+              <Text className="form-label">{t('services.remark')}</Text>
               <TextArea
-                placeholder="如有特殊需求请注明"
+                placeholder={t('services.remarkPlaceholder')}
                 value={remark}
                 onChange={(v) => setRemark(v)}
                 className="form-textarea"
@@ -176,7 +176,7 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
         </View>
         {!showForm ? (
           <NutButton type="primary" size="large" onClick={() => setShowForm(true)}>
-            立即预约
+            {t('services.bookNow')}
           </NutButton>
         ) : (
           <NutButton
@@ -185,7 +185,7 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
             loading={loading}
             onClick={handleBook}
           >
-            确认预约
+            {t('services.confirmBooking')}
           </NutButton>
         )}
       </View>

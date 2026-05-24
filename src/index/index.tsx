@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, Text, Image } from '@tarojs/components'
+import { useTranslation } from 'react-i18next'
 import PageContainer from '@/shared/components/page_container'
 import { Button } from '@nutui/nutui-react-taro'
 import { inject, observer } from 'mobx-react'
 import Router from '@/shared/utils/route'
 import { serviceCategories } from '@/shared/mock/services'
+import LanguageSwitcher from '@/shared/components/language-switcher'
 
 import './index.scss'
 
@@ -16,6 +18,8 @@ const categoryIcons: Record<string, string> = {
 }
 
 const Index: React.FC<{ store?: any }> = ({ store }) => {
+  const { t } = useTranslation()
+
   const handleCategoryClick = (cat: string) => {
     Router.navigateTo({
       url: '/services/index',
@@ -28,19 +32,20 @@ const Index: React.FC<{ store?: any }> = ({ store }) => {
   }
 
   return (
-    <PageContainer title="预约助手" containerClass="index">
+    <PageContainer title={t('app.name')} containerClass="index">
+      <LanguageSwitcher />
       <View className="home-banner">
         <View className="home-banner-content">
-          <Text className="home-banner-title">在线预约</Text>
-          <Text className="home-banner-subtitle">选择服务，轻松预约</Text>
+          <Text className="home-banner-title">{t('home.bannerTitle')}</Text>
+          <Text className="home-banner-subtitle">{t('home.bannerSubtitle')}</Text>
         </View>
       </View>
 
       <View className="home-section">
         <View className="home-section-header">
-          <Text className="home-section-title">服务分类</Text>
+          <Text className="home-section-title">{t('home.categories')}</Text>
           <Text className="home-section-more" onClick={handleViewAll}>
-            查看全部 &gt;
+            {t('home.viewAll')} &gt;
           </Text>
         </View>
         <View className="home-category-grid">
@@ -61,7 +66,7 @@ const Index: React.FC<{ store?: any }> = ({ store }) => {
 
       <View className="home-section">
         <View className="home-section-header">
-          <Text className="home-section-title">快捷入口</Text>
+          <Text className="home-section-title">{t('home.quickActions')}</Text>
         </View>
         <View className="home-quick-actions">
           <Button
@@ -71,7 +76,7 @@ const Index: React.FC<{ store?: any }> = ({ store }) => {
             onClick={handleViewAll}
             className="home-quick-btn"
           >
-            浏览全部服务
+            {t('home.browseServices')}
           </Button>
           <Button
             block
@@ -79,7 +84,7 @@ const Index: React.FC<{ store?: any }> = ({ store }) => {
             onClick={() => Router.switchTab({ url: '/user/index' })}
             className="home-quick-btn-outline"
           >
-            我的订单
+            {t('home.myOrders')}
           </Button>
         </View>
       </View>
