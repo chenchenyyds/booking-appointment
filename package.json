@@ -1,5 +1,5 @@
 {
-	"name": "taro3-react-template",
+	"name": "booking-appointment",
 	"version": "1.0.0",
 	"private": true,
 	"description": "基于 Taro3 + React Hooks + TypeScript + Scss 的开箱即用的多端项目模版。",
