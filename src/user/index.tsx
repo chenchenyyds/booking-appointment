@@ -35,8 +35,7 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
       handleLogin()
       return
     }
-    // Navigate to orders page (to be built)
-    Taro.showToast({ title: '订单功能开发中', icon: 'none' })
+    Router.navigateTo({ url: '/orders/index' })
   }
 
   return (

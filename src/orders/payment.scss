@@ -1,0 +1,144 @@
+.payment-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 120px;
+}
+
+.payment-content {
+  padding: 20px;
+  padding-top: 196px;
+}
+
+.payment-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  margin-bottom: 20px;
+}
+
+.payment-amount-section {
+  text-align: center;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.payment-label {
+  font-size: 26px;
+  color: #999;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.payment-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  color: #ff4d4f;
+}
+
+.payment-currency {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.payment-value {
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.payment-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.payment-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment-info-label {
+  font-size: 28px;
+  color: #666;
+}
+
+.payment-info-value {
+  font-size: 28px;
+  color: #333;
+  font-weight: 500;
+}
+
+.payment-methods {
+  background: #fff;
+  border-radius: 20px;
+  padding: 8px 0;
+}
+
+.payment-method-item {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  gap: 16px;
+  position: relative;
+}
+
+.payment-method-icon {
+  font-size: 36px;
+}
+
+.payment-method-name {
+  flex: 1;
+  font-size: 30px;
+  color: #333;
+}
+
+.payment-method-check {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #667eea;
+  background: #667eea;
+  position: relative;
+}
+
+.payment-method-check::after {
+  content: '✓';
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  font-size: 22px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.payment-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 16px 32px;
+  display: flex;
+  gap: 16px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.payment-btn-cancel {
+  flex: 1;
+  height: 84px;
+  border-radius: 42px;
+  font-size: 30px;
+  color: #666;
+  border: 2px solid #e8e8e8;
+  background: #fff;
+}
+
+.payment-btn-confirm {
+  flex: 2;
+  height: 84px;
+  border-radius: 42px;
+  font-size: 30px;
+  font-weight: 600;
+}

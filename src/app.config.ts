@@ -13,6 +13,10 @@ export default defineAppConfig({
       pages: ['index', 'detail'],
     },
     {
+      root: 'orders',
+      pages: ['index', 'detail', 'payment'],
+    },
+    {
       root: 'demo',
       pages: ['router/router', 'router/routerTarget', 'form/form'],
     },
