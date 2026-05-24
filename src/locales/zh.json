@@ -86,5 +86,11 @@
     "loading": "加载中...",
     "confirm": "确认",
     "cancel": "取消"
+  },
+  "notification": {
+    "title": "开启通知",
+    "content": "开启消息通知，及时获取预约状态更新和提醒。",
+    "confirmText": "去开启",
+    "cancelText": "暂不"
   }
 }

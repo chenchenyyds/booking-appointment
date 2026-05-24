@@ -7,6 +7,7 @@ import NavigationHeader from '@/shared/components/navigation_header'
 import Router from '@/shared/utils/route'
 import { inject, observer } from 'mobx-react'
 import { getServiceDetail, submitBooking } from '@/shared/services/appointment.service'
+import { showSubscribePrompt } from '@/shared/services/notification'
 import { ServiceItem } from '@/shared/mock/services'
 import './detail.scss'
 
@@ -49,7 +50,15 @@ const ServiceDetail: React.FC<{ store?: any }> = ({ store }) => {
         remark,
       })
       Taro.showToast({ title: t('services.bookingSuccess'), icon: 'success' })
-      setTimeout(() => Router.backToHome(), 1500)
+      setTimeout(() => {
+        showSubscribePrompt(
+          t('notification.title'),
+          t('notification.content'),
+          t('notification.confirmText'),
+          t('notification.cancelText'),
+          () => Router.backToHome()
+        )
+      }, 1500)
     } catch (e) {
       Taro.showToast({ title: t('services.bookingFail'), icon: 'none' })
     } finally {

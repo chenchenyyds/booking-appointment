@@ -6,6 +6,7 @@ import { Button as NutButton, Dialog } from '@nutui/nutui-react-taro'
 import NavigationHeader from '@/shared/components/navigation_header'
 import Router from '@/shared/utils/route'
 import { mockOrders } from '@/shared/mock/orders'
+import { showSubscribePrompt } from '@/shared/services/notification'
 import './payment.scss'
 
 const PaymentPage: React.FC = () => {
@@ -33,7 +34,13 @@ const PaymentPage: React.FC = () => {
   const handleResultConfirm = () => {
     setShowResult(false)
     if (paySuccess) {
-      Router.switchTab({ url: '/user/index' })
+      showSubscribePrompt(
+        t('notification.title'),
+        t('notification.content'),
+        t('notification.confirmText'),
+        t('notification.cancelText'),
+        () => Router.switchTab({ url: '/user/index' })
+      )
     }
   }
 
