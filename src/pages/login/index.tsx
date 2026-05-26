@@ -4,9 +4,9 @@ import Taro from '@tarojs/taro'
 import { inject, observer } from 'mobx-react'
 import { useTranslation } from 'react-i18next'
 import { Button as NutButton } from '@nutui/nutui-react-taro'
-import NavigationHeader from '@/shared/components/navigation_header'
-import Router from '@/shared/utils/route'
-import { wechatLogin } from '@/shared/services/auth.service'
+import NavigationHeader from '@/components/navigation_header'
+import Router from '@/utils/route'
+import { wechatLogin } from '@/services/auth.service'
 import './index.scss'
 
 const LoginPage: React.FC<{ store?: any }> = ({ store }) => {

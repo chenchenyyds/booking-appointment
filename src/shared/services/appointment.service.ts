@@ -1,4 +1,4 @@
-import { mockServices, ServiceItem } from '@/shared/mock/services'
+import { mockServices, ServiceItem } from '@/mock/services'
 
 export interface BookingForm {
   serviceId: string

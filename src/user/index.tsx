@@ -4,9 +4,9 @@ import Taro from '@tarojs/taro'
 import { useTranslation } from 'react-i18next'
 import { inject, observer } from 'mobx-react'
 import { Button, Avatar } from '@nutui/nutui-react-taro'
-import PageContainer from '@/shared/components/page_container'
-import LanguageSwitcher from '@/shared/components/language-switcher'
-import Router from '@/shared/utils/route'
+import PageContainer from '@/components/page_container'
+import LanguageSwitcher from '@/components/language-switcher'
+import Router from '@/utils/route'
 
 import './index.scss'
 
@@ -17,7 +17,7 @@ const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
   const userInfo = auth.userInfo
 
   const handleLogin = () => {
-    Router.navigateTo({ url: '/login/index' })
+    Router.navigateTo({ url: '/pages/login/index' })
   }
 
   const handleLogout = () => {

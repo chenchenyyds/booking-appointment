@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import { useTranslation } from 'react-i18next'
-import PageContainer from '@/shared/components/page_container'
+import PageContainer from '@/components/page_container'
 import { Button } from '@nutui/nutui-react-taro'
 import { inject, observer } from 'mobx-react'
-import Router from '@/shared/utils/route'
-import { serviceCategories } from '@/shared/mock/services'
-import LanguageSwitcher from '@/shared/components/language-switcher'
+import Router from '@/utils/route'
+import { serviceCategories } from '@/mock/services'
+import LanguageSwitcher from '@/components/language-switcher'
 
 import './index.scss'
 

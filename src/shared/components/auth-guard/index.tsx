@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { inject, observer } from 'mobx-react'
-import Router from '@/shared/utils/route'
+import Router from '@/utils/route'
 
 interface AuthGuardProps {
   store?: any
@@ -17,7 +17,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
 }) => {
   useEffect(() => {
     if (requireAuth && !store.auth.checkLogin()) {
-      Router.navigateTo({ url: '/login/index' })
+      Router.navigateTo({ url: '/pages/login/index' })
     }
   }, [])
 

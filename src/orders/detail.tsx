@@ -3,9 +3,9 @@ import { View, Text, Image, ScrollView } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
 import { useTranslation } from 'react-i18next'
 import { Tag, Button as NutButton } from '@nutui/nutui-react-taro'
-import NavigationHeader from '@/shared/components/navigation_header'
-import Router from '@/shared/utils/route'
-import { mockOrders, ORDER_STATUS_MAP, OrderItem } from '@/shared/mock/orders'
+import NavigationHeader from '@/components/navigation_header'
+import Router from '@/utils/route'
+import { mockOrders, ORDER_STATUS_MAP, OrderItem } from '@/mock/orders'
 import './detail.scss'
 
 const OrderDetail: React.FC = () => {
