@@ -1,13 +1,5 @@
 import Taro from '@tarojs/taro'
 
-const MOCK_USERS: Record<string, { nickName: string; avatarUrl: string; phoneNumber: string }> = {
-  test_code_001: {
-    nickName: 'Demo User',
-    avatarUrl: 'https://api.slingacademy.com/public/sample-users/1.png',
-    phoneNumber: '138****8888',
-  },
-}
-
 export interface LoginResult {
   token: string
   openid: string
@@ -16,43 +8,47 @@ export interface LoginResult {
   phoneNumber: string
 }
 
-export async function wechatLogin(): Promise<LoginResult> {
-  try {
-    const loginRes = await Taro.login()
-    if (loginRes.code) {
-      // Mock backend token exchange
-      const userInfo = MOCK_USERS[loginRes.code] || MOCK_USERS.test_code_001 || {
-        nickName: 'Demo User',
-        avatarUrl: 'https://api.slingacademy.com/public/sample-users/2.png',
-        phoneNumber: '139****9999',
-      }
-      const openid = `wx_openid_${Date.now()}`
-      return { token: `wx_token_${openid}`, openid, ...userInfo }
-    }
-  } catch (_) {
-    // Not in WeChat environment — fall through to mock login
-  }
-
-  // Fallback: mock login for dev / H5 preview
-  const fallbackUser = MOCK_USERS.test_code_001 || {
-    nickName: 'Demo User',
-    avatarUrl: 'https://api.slingacademy.com/public/sample-users/1.png',
-    phoneNumber: '138****8888',
-  }
-  const openid = `dev_openid_${Date.now()}`
-  const token = `dev_token_${openid}`
-  return { token, openid, ...fallbackUser }
+// In real production, the code should be sent to YOUR backend,
+// which calls https://api.weixin.qq.com/sns/jscode2session to exchange for openid.
+// Here in dev, we use the code itself as the openid identifier.
+async function getOpenidFromCode(code: string): Promise<string> {
+  // In production: POST code to backend → backend calls code2Session → returns openid
+  return `wx_${code.slice(0, 16)}`
 }
 
-export async function getUserProfile(): Promise<{
-  nickName: string
-  avatarUrl: string
-  phoneNumber: string
-}> {
-  // In production: call backend with token to fetch user profile
+export async function wechatLogin(): Promise<LoginResult> {
+  // Step 1: wx.login() — get temporary code (REAL WeChat API)
+  const loginRes = await Taro.login()
+  if (!loginRes.code) {
+    throw new Error('wx.login() failed: no code returned')
+  }
+
+  // Step 2: Exchange code for openid
+  // In production: POST to your backend. Here we use code as identifier.
+  const openid = await getOpenidFromCode(loginRes.code)
+  const token = `token_${openid}_${Date.now()}`
+
+  // Step 3: Get user profile (REAL WeChat API)
+  let nickName = '微信用户'
+  let avatarUrl = ''
+  try {
+    const profileRes = await Taro.getUserProfile({
+      desc: '用于展示用户信息',
+    })
+    if (profileRes.userInfo) {
+      nickName = profileRes.userInfo.nickName || nickName
+      avatarUrl = profileRes.userInfo.avatarUrl || avatarUrl
+    }
+  } catch (_) {
+    // getUserProfile may fail on newer SDK or if user denies
+    // Fall through with default nickname
+  }
+
   return {
-    nickName: 'Demo User',
-    avatarUrl: 'https://api.slingacademy.com/public/sample-users/1.png',
-    phoneNumber: '138****8888',
+    token,
+    openid,
+    nickName,
+    avatarUrl,
+    phoneNumber: '', // Requires <button open-type="getPhoneNumber"> separately
   }
 }

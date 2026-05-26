@@ -13,7 +13,7 @@ import './index.scss'
 const UserIndex: React.FC<{ store?: any }> = ({ store }) => {
   const { t } = useTranslation()
   const { auth } = store
-  const isLoggedIn = auth.checkLogin()
+  const isLoggedIn = auth.isLoggedIn
   const userInfo = auth.userInfo
 
   const handleLogin = () => {
